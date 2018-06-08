@@ -11,9 +11,10 @@ using System;
 namespace NNMetrics.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180608062659_initial2")]
+    partial class initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,8 +196,6 @@ namespace NNMetrics.Data.Migrations
                     b.Property<int>("POSatisfaction");
 
                     b.Property<string>("Title");
-
-                    b.Property<string>("userName");
 
                     b.HasKey("ID");
 

@@ -11,9 +11,10 @@ using System;
 namespace NNMetrics.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180608060537_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,30 +178,6 @@ namespace NNMetrics.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("NNMetrics.Models.Metrics", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CompletedForecast");
-
-                    b.Property<int>("MTTR");
-
-                    b.Property<DateTime>("MeasureDate");
-
-                    b.Property<int>("NumberOfDeployments");
-
-                    b.Property<int>("POSatisfaction");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("userName");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Metrics");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
