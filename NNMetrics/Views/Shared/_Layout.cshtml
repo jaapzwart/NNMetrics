@@ -6,6 +6,14 @@
     <title>@ViewData["Title"] - NNMetrics</title>
 
     <environment include="Development">
+        <link href="~/scripts/flot/examples/examples.css" rel="stylesheet" type="text/css">
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="~/scripts/flot/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="~/scripts/flot/jquery.flot.js"></script>
+
+        <link rel="stylesheet" href="../scripts/bar.css">
+        <script src="../scripts/bar.js"></script>
+
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -31,7 +39,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <!--<li><a asp-area="" asp-controller="Metrics" asp-action="Index">Metrics</a></li>-->
+                    <li><a asp-area="" asp-controller="Metrics" asp-action="Index">Metrics</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
