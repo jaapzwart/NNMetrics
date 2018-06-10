@@ -14,19 +14,52 @@ namespace NNMetrics.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// The metrics db context to be used.
+        /// </summary>
+        /// <param name="context">The context given to the contorller.</param>
         public MetricsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult UseDataFromServer()
+        /// <summary>
+        /// Get the chart for the MTTR.
+        /// </summary>
+        /// <returns>View with the MTTR chart.</returns>
+        public IActionResult UseDataFromServerMTTR()
         {
+            ViewBag.currentUser = SharedData.userName;
             return View();
         }
 
-        public JsonResult JsonData()
+        /// <summary>
+        /// Get the chart for the PO satisfaction.
+        /// </summary>
+        /// <returns>View with the PO satisfaction chart.</returns>
+        public IActionResult UseDataFromServerPO()
         {
-            var data = ModelHelper.MultiLineData();
+            ViewBag.currentUser = SharedData.userName;
+            return View();
+        }
+
+        /// <summary>
+        /// Get Json data for PO satisfaction.
+        /// </summary>
+        /// <returns>Json data for PO satisfaction.</returns>
+        public JsonResult JsonDataMTTR()
+        {
+            var data = ModelHelper.MultiLineDataMTTR();
+            return Json(data);
+        }
+
+        /// <summary>
+        /// Get json data for PO satisfaction
+        /// </summary>
+        /// <returns>Json data for PO satisfaction</returns>
+        public JsonResult JsonDataPO()
+        {
+            var data = ModelHelper.MultiLineDataPOSatisfaction();
             return Json(data);
         }
 
@@ -40,7 +73,19 @@ namespace NNMetrics.Controllers
             var signatures = from b in _context.Metrics
                                        where b.userName == User.Identity.Name
                                        select b;
+            //-------------------------------------------------------------------------------------------
+            // Down iterations are needed to get the data used for the json charts data.
+            // Dynamic getting data in the model and view built up every call puts some difficulties 
+            // in the freedom of getting data in the view where if statements will fail.
+            // Although probably better solution are possible than the one down here, it is effective
+            // and only makes the different built up of data in the model helper still a bit clumsy.
+            // Time did not allowed for a better solution, cause we had 2 weeks to deliver.
+            // Now you have:
+            // Index --> SharedData class --> Model.Helper --> controller methods --> View
+            //-------------------------------------------------------------------------------------------
+
             // Get MTTR in an array
+            SharedData.db_mttr.Clear();
             var mttr = from b in _context.Metrics
                        where b.userName == SharedData.userName
                        select b.MTTR;
@@ -49,7 +94,18 @@ namespace NNMetrics.Controllers
                 SharedData.db_mttr.Add(item);
             }
 
+            // Get PO Satisfaction in an array
+            SharedData.db_PO.Clear();
+            var po = from b in _context.Metrics
+                       where b.userName == SharedData.userName
+                       select b.POSatisfaction;
+            foreach (var item in po)
+            {
+                SharedData.db_PO.Add(item);
+            }
+
             // Get Title in an array
+            SharedData.db_title.Clear();
             var title = from b in _context.Metrics
                        where b.userName == SharedData.userName
                        select b.Title;
@@ -93,7 +149,11 @@ namespace NNMetrics.Controllers
             return View();
         }
 
-        // POST: Metrics/Create
+        /// <summary>
+        /// Create new petrics.
+        /// </summary>
+        /// <param name="metrics">Metrics to be added.</param>
+        /// <returns>New record with metrics.</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -110,7 +170,11 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        // GET: Metrics/Edit/5
+        /// <summary>
+        /// Edit the metrics.
+        /// </summary>
+        /// <param name="id">Edit given id.</param>
+        /// <returns>Return the record which must be editted.</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,7 +190,12 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        // POST: Metrics/Edit/5
+        /// <summary>
+        /// Edit the given record.
+        /// </summary>
+        /// <param name="id">Edit for the given id.</param>
+        /// <param name="metrics">The metrics to be edit.</param>
+        /// <returns>The editted record.</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -161,7 +230,11 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        // GET: Metrics/Delete/5
+        /// <summary>
+        /// Delete the given metrics.
+        /// </summary>
+        /// <param name="id">The id to be deleted.</param>
+        /// <returns>The record to be deleted.</returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -179,7 +252,11 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        // POST: Metrics/Delete/5
+        /// <summary>
+        /// Conforms the deletion of the given record.
+        /// </summary>
+        /// <param name="id">The id of the record to be deleted.</param>
+        /// <returns>The case that the record is deleted.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -10,10 +10,10 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            $.get('JsonData', function (jsonData) {
+            $.get('JsonDataPO', function (jsonData) {
                 data = google.visualization.arrayToDataTable(jsonData, false);
                 var option = {
-                    title: "Bar Chart",
+                    title: "Bar Chart PO Satisfaction",
                     width: 800,
                     height: 600
                 };
@@ -23,3 +23,5 @@
         }
     </script>
 }
+
+
