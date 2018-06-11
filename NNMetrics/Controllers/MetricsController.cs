@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NNMetrics.Data;
 using NNMetrics.Models;
+using System;
 
 namespace NNMetrics.Controllers
 {
@@ -43,6 +41,12 @@ namespace NNMetrics.Controllers
             return View();
         }
 
+        public IActionResult UseDataFromServerCompleted()
+        {
+            ViewBag.currentUser = SharedData.userName;
+            return View();
+        }
+
         /// <summary>
         /// Get Json data for PO satisfaction.
         /// </summary>
@@ -54,12 +58,22 @@ namespace NNMetrics.Controllers
         }
 
         /// <summary>
-        /// Get json data for PO satisfaction
+        /// Get json data for PO satisfaction.
         /// </summary>
-        /// <returns>Json data for PO satisfaction</returns>
+        /// <returns>Json data for PO satisfaction.</returns>
         public JsonResult JsonDataPO()
         {
             var data = ModelHelper.MultiLineDataPOSatisfaction();
+            return Json(data);
+        }
+
+        /// <summary>
+        /// Get Json data for completed from planned.
+        /// </summary>
+        /// <returns>Json data for completed from planned.</returns>
+        public JsonResult JsonDataCompleted()
+        {
+            var data = ModelHelper.MultiLineDataCompletedFromPlanned();
             return Json(data);
         }
 
@@ -69,10 +83,13 @@ namespace NNMetrics.Controllers
         /// <returns>Returns the table with Metrics for the current user.</returns>
         public IActionResult Index()
         {
+            SharedData._contextGlobal = _context;
             SharedData.userName = User.Identity.Name;
             var signatures = from b in _context.Metrics
                                        where b.userName == User.Identity.Name
                                        select b;
+            SharedData.MetricsRecordCount = signatures.Count();
+
             //-------------------------------------------------------------------------------------------
             // Down iterations are needed to get the data used for the json charts data.
             // Dynamic getting data in the model and view built up every call puts some difficulties 
@@ -84,7 +101,7 @@ namespace NNMetrics.Controllers
             // Index --> SharedData class --> Model.Helper --> controller methods --> View
             //-------------------------------------------------------------------------------------------
 
-            // Get MTTR in an array
+            // Get MTTR in an array.
             SharedData.db_mttr.Clear();
             var mttr = from b in _context.Metrics
                        where b.userName == SharedData.userName
@@ -94,7 +111,7 @@ namespace NNMetrics.Controllers
                 SharedData.db_mttr.Add(item);
             }
 
-            // Get PO Satisfaction in an array
+            // Get PO Satisfaction in an array.
             SharedData.db_PO.Clear();
             var po = from b in _context.Metrics
                        where b.userName == SharedData.userName
@@ -102,6 +119,16 @@ namespace NNMetrics.Controllers
             foreach (var item in po)
             {
                 SharedData.db_PO.Add(item);
+            }
+
+            // Get Completed from planned in an array.
+            SharedData.db_Completed.Clear();
+            var completed = from b in _context.Metrics
+                     where b.userName == SharedData.userName
+                     select b.CompletedForecast;
+            foreach (var item in completed)
+            {
+                SharedData.db_Completed.Add(item);
             }
 
             // Get Title in an array
@@ -265,6 +292,24 @@ namespace NNMetrics.Controllers
             _context.Metrics.Remove(metrics);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult DeleteAll()
+        {
+            ViewBag.Error = "";
+            try
+            {
+                // delete Metrics for given user.
+                _context.RemoveRange(_context.Metrics.Where(x => x.userName.Contains(SharedData.userName)));
+                _context.SaveChanges();
+                ViewBag.error = "Records succesful deleted.";
+                
+            }
+            catch (Exception e)
+            {
+                ViewBag.error = "Delete not successful:" + e.Message;
+            }
+            return View();
         }
 
         private bool MetricsExists(int id)

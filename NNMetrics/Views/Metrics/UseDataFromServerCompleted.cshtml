@@ -10,16 +10,19 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            $.get('JsonDataMTTR', function (jsonData) {
+            $.get('JsonDataCompleted', function (jsonData) {
                 data = google.visualization.arrayToDataTable(jsonData, false);
                 var option = {
-                    title: "Bar Chart MTTR",
+                    title: "Bar Chart Completed from Planned",
                     width: 800,
                     height: 600,
                 };
+                option.is3D = true;
                 chart = new google.visualization.BarChart(document.getElementById('chart1'));
                 chart.draw(data, option);
             })
         }
     </script>
 }
+
+

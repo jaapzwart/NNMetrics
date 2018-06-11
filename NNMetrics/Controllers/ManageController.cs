@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -9,10 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NNMetrics.Models;
 using NNMetrics.Models.ManageViewModels;
 using NNMetrics.Services;
+using NNMetrics.Data;
 
 namespace NNMetrics.Controllers
 {
@@ -463,7 +462,49 @@ namespace NNMetrics.Controllers
 
             return View(model);
         }
+        
+        /// <summary>
+        /// Delete the user.
+        /// </summary>
+        /// <returns>Page indicating if delete was successful or not.</returns>
+        public async Task<IActionResult> Delete()
+        {
+            ViewBag.error = "";
+            try
+            {
+                if(SharedData.MetricsRecordCount > 0)
+                {
+                    ViewBag.error = "Still records available for this user. Delete them first.";
+                    return View();
+                }
 
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                }
+                await _userManager.DeleteAsync(user);
+
+                try
+                {
+                    var result = new AccountController(_userManager, _signInManager, _emailSender, null).Logout();
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception e)
+                {
+                    ViewBag.error = e.Message;
+                }
+                return View();
+                
+            }
+            catch(Exception e)
+            {
+                ViewBag.error = "Delete unsuccessful:" + e.Message;
+                return View(); ;
+            }
+            
+        }
+        
         #region Helpers
 
         private void AddErrors(IdentityResult result)

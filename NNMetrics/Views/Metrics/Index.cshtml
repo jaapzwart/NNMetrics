@@ -10,8 +10,10 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-@Html.ActionLink("Chart MTTR", "UseDataFromServerMTTR", "Metrics") " - "
-@Html.ActionLink("Chart PO", "UseDataFromServerPO", "Metrics")
+@Html.ActionLink("Chart MTTR", "UseDataFromServerMTTR", "Metrics")  - 
+@Html.ActionLink("Chart PO", "UseDataFromServerPO", "Metrics") - 
+@Html.ActionLink("Chart Completed", "UseDataFromServerCompleted", "Metrics") - 
+@Html.ActionLink("Delete all records", "DeleteAll", "Metrics")
 <table class="table">
     <thead>
         <tr>

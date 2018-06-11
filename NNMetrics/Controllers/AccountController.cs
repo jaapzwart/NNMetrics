@@ -36,7 +36,7 @@ namespace NNMetrics.Controllers
             _emailSender = emailSender;
             _logger = logger;
         }
-
+        
         [TempData]
         public string ErrorMessage { get; set; }
 
@@ -65,7 +65,8 @@ namespace NNMetrics.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("index", "Metrics");
+                    //return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
