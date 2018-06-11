@@ -15,6 +15,9 @@ using NNMetrics.Data;
 
 namespace NNMetrics.Controllers
 {
+    /// <summary>
+    /// Controller to manage the users.
+    /// </summary>
     [Authorize]
     [Route("[controller]/[action]")]
     public class ManageController : Controller
@@ -27,6 +30,14 @@ namespace NNMetrics.Controllers
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
+        /// <summary>
+        /// The constructor preparing the basic stuff.
+        /// </summary>
+        /// <param name="userManager">Object to work on.</param>
+        /// <param name="signInManager">Signin manager to work on.</param>
+        /// <param name="emailSender">Email sender to use when needed.</param>
+        /// <param name="logger">Logger to be used wen needed.</param>
+        /// <param name="urlEncoder">Encoder for the url when needed.</param>
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
@@ -41,9 +52,16 @@ namespace NNMetrics.Controllers
             _urlEncoder = urlEncoder;
         }
 
+        /// <summary>
+        /// String to use for status messages.
+        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
+        /// <summary>
+        /// Page to get the basic user data of the loged in user.
+        /// </summary>
+        /// <returns>Returns the page with the model with the data of the given user.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -65,6 +83,11 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// The model of the current user to work on.
+        /// </summary>
+        /// <param name="model">Model with the user data.</param>
+        /// <returns>The page with the data from the model of user data.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
@@ -104,6 +127,11 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Method to send verification email when needed.
+        /// </summary>
+        /// <param name="model">The model with user data.</param>
+        /// <returns>Page with the send verification email information.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
@@ -128,6 +156,10 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Method to change password of user.
+        /// </summary>
+        /// <returns>Page to change the password.</returns>
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
@@ -147,6 +179,11 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Change password for the current user.
+        /// </summary>
+        /// <param name="model">Model of the current user for changing the password.</param>
+        /// <returns>Page with the user model to change password.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -176,6 +213,10 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(ChangePassword));
         }
 
+        /// <summary>
+        /// Set the [assword for the current user.
+        /// </summary>
+        /// <returns>Model with current user data.</returns>
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
@@ -196,6 +237,11 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Set password for the current user.
+        /// </summary>
+        /// <param name="model">Model with user data.</param>
+        /// <returns>The page with current user model data to set password.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
@@ -224,6 +270,11 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(SetPassword));
         }
 
+
+        /// <summary>
+        /// Method for external logins.
+        /// </summary>
+        /// <returns>Page with model for external logins.</returns>
         [HttpGet]
         public async Task<IActionResult> ExternalLogins()
         {
@@ -243,6 +294,11 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Method for linklogin.
+        /// </summary>
+        /// <param name="provider">Provider for the linklogin.</param>
+        /// <returns>The provider and properties to work on.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LinkLogin(string provider)

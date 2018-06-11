@@ -1,5 +1,6 @@
 ﻿<div class="container">
     <div id="chart1"></div>
+    <div id="chart2"></div>
 </div>
 
 @section scripts{
@@ -18,7 +19,7 @@
                     height: 600,
                 };
                 chart = new google.visualization.BarChart(document.getElementById('chart1'));
-                chart.draw(data, option);
+                chart.draw(data, option);                
             })
         }
     </script>

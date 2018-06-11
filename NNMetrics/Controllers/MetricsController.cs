@@ -8,8 +8,14 @@ using System;
 
 namespace NNMetrics.Controllers
 {
+    /// <summary>
+    /// Controler for the Metrics db.
+    /// </summary>
     public class MetricsController : Controller
     {
+        /// <summary>
+        /// The db context working on in this controller.
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
         /// <summary>
