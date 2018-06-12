@@ -1,4 +1,10 @@
-﻿using System.Linq;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+// file:	Controllers\MetricsController.cs
+//
+// summary:	Implements the metrics controller class
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,46 +12,75 @@ using NNMetrics.Data;
 using NNMetrics.Models;
 using System;
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// namespace: NNMetrics.Controllers
+//
+// summary:	.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace NNMetrics.Controllers
 {
-    /// <summary>
-    /// Controler for the Metrics db.
-    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   A controller for handling metrics. </summary>
+    ///
+    /// <remarks>   Administrator, 12/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public class MetricsController : Controller
     {
-        /// <summary>
-        /// The db context working on in this controller.
-        /// </summary>
+        
+        /// <summary>   The context. </summary>
         private readonly ApplicationDbContext _context;
 
-        /// <summary>
-        /// The metrics db context to be used.
-        /// </summary>
-        /// <param name="context">The context given to the contorller.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Constructor. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="context">  The context. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public MetricsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        /// <summary>
-        /// Get the chart for the MTTR.
-        /// </summary>
-        /// <returns>View with the MTTR chart.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Use data from server mttr. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public IActionResult UseDataFromServerMTTR()
         {
             ViewBag.currentUser = SharedData.userName;
             return View();
         }
 
-        /// <summary>
-        /// Get the chart for the PO satisfaction.
-        /// </summary>
-        /// <returns>View with the PO satisfaction chart.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Use data from server po. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public IActionResult UseDataFromServerPO()
         {
             ViewBag.currentUser = SharedData.userName;
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Use data from server completed. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public IActionResult UseDataFromServerCompleted()
         {
@@ -53,40 +88,84 @@ namespace NNMetrics.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Get Json data for PO satisfaction.
-        /// </summary>
-        /// <returns>Json data for PO satisfaction.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Use data from server dp. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public IActionResult UseDataFromServerDP()
+        {
+            ViewBag.currentUser = SharedData.userName;
+            return View();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Creates a JSON result with the given data as its content. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   A JSON response stream to send to the JsonDataMTTR action. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public JsonResult JsonDataMTTR()
         {
             var data = ModelHelper.MultiLineDataMTTR();
             return Json(data);
         }
 
-        /// <summary>
-        /// Get json data for PO satisfaction.
-        /// </summary>
-        /// <returns>Json data for PO satisfaction.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Creates a JSON result with the given data as its content. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   A JSON response stream to send to the JsonDataPO action. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public JsonResult JsonDataPO()
         {
             var data = ModelHelper.MultiLineDataPOSatisfaction();
             return Json(data);
         }
 
-        /// <summary>
-        /// Get Json data for completed from planned.
-        /// </summary>
-        /// <returns>Json data for completed from planned.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Creates a JSON result with the given data as its content. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   A JSON response stream to send to the JsonDataCompleted action. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public JsonResult JsonDataCompleted()
         {
             var data = ModelHelper.MultiLineDataCompletedFromPlanned();
             return Json(data);
         }
 
-        /// <summary>
-        /// Get the metrics table based on current user.
-        /// </summary>
-        /// <returns>Returns the table with Metrics for the current user.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Creates a JSON result with the given data as its content. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   A JSON response stream to send to the JsonDataDP action. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public JsonResult JsonDataDP()
+        {
+            var data = ModelHelper.MultiLineDataDeployments();
+            return Json(data);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets the index. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public IActionResult Index()
         {
             SharedData._contextGlobal = _context;
@@ -137,7 +216,17 @@ namespace NNMetrics.Controllers
                 SharedData.db_Completed.Add(item);
             }
 
-            // Get Title in an array
+            // Get the number of deployments.
+            SharedData.db_dp.Clear();
+            var deployments = from b in _context.Metrics
+                            where b.userName == SharedData.userName
+                            select b.NumberOfDeployments;
+            foreach (var item in deployments)
+            {
+                SharedData.db_dp.Add(item);
+            }
+
+            // Get Title in an array.
             SharedData.db_title.Clear();
             var title = from b in _context.Metrics
                        where b.userName == SharedData.userName
@@ -150,11 +239,16 @@ namespace NNMetrics.Controllers
             return View(signatures.ToList());
         }
 
-        /// <summary>
-        /// Get the details of the metrics.
-        /// </summary>
-        /// <param name="id">Id of the chosen metric in the table.</param>
-        /// <returns>Return the chosen metric from the table.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Details the given identifier. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="id">   Edit given id. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -172,23 +266,32 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        /// <summary>
-        /// Create a new record with metrics.
-        /// </summary>
-        /// <returns>Return the page for creating the new metrics.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Creates a new IActionResult. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public IActionResult Create()
         {
             ViewBag.currentUser = User.Identity.Name;
             return View();
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Create new petrics.
+        /// (An Action that handles HTTP POST requests) creates a new Task&lt;IActionResult&gt;
         /// </summary>
-        /// <param name="metrics">Metrics to be added.</param>
-        /// <returns>New record with metrics.</returns>
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="metrics">  The metrics to be edit. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,userName,Title,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
@@ -203,11 +306,16 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        /// <summary>
-        /// Edit the metrics.
-        /// </summary>
-        /// <param name="id">Edit given id.</param>
-        /// <returns>Return the record which must be editted.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Edits the given identifier. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="id">   Edit given id. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -223,14 +331,20 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        /// <summary>
-        /// Edit the given record.
-        /// </summary>
-        /// <param name="id">Edit for the given id.</param>
-        /// <param name="metrics">The metrics to be edit.</param>
-        /// <returns>The editted record.</returns>
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) edits. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="DbUpdateConcurrencyException"> Thrown when a Database Update Concurrency
+        ///                                                 error condition occurs. </exception>
+        ///
+        /// <param name="id">       The id of the record to be deleted. </param>
+        /// <param name="metrics">  The metrics to be edit. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,userName,Title,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
@@ -263,11 +377,16 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
-        /// <summary>
-        /// Delete the given metrics.
-        /// </summary>
-        /// <param name="id">The id to be deleted.</param>
-        /// <returns>The record to be deleted.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Deletes the given ID. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="id">   Edit given id. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -285,11 +404,19 @@ namespace NNMetrics.Controllers
             return View(metrics);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Conforms the deletion of the given record.
+        /// (An Action that handles HTTP POST requests) (Defines the Delete Action) deletes the confirmed
+        /// described by ID.
         /// </summary>
-        /// <param name="id">The id of the record to be deleted.</param>
-        /// <returns>The case that the record is deleted.</returns>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="id">   The id of the record to be deleted. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -299,6 +426,14 @@ namespace NNMetrics.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Deletes all. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public IActionResult DeleteAll()
         {
@@ -317,6 +452,16 @@ namespace NNMetrics.Controllers
             }
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Queries if a given metrics exists. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="id">   The id of the record to be deleted. </param>
+        ///
+        /// <returns>   True if it succeeds, false if it fails. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private bool MetricsExists(int id)
         {

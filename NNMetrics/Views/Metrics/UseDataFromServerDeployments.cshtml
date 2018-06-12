@@ -1,0 +1,27 @@
+﻿<div class="container">
+    <div id="chart1"></div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            $.get('JsonDataDP', function (jsonData) {
+                data = google.visualization.arrayToDataTable(jsonData, false);
+                var option = {
+                    title: "Bar Chart Number of Deployments",
+                    width: 800,
+                    height: 600,
+                };
+                option.is3D = true;
+                chart = new google.visualization.BarChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+}
+

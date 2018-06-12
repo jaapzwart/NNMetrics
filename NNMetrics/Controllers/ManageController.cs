@@ -1,4 +1,10 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+// file:	Controllers\ManageController.cs
+//
+// summary:	Implements the manage controller class
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -13,31 +19,51 @@ using NNMetrics.Models.ManageViewModels;
 using NNMetrics.Services;
 using NNMetrics.Data;
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// namespace: NNMetrics.Controllers
+// 
+// summary:	. 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace NNMetrics.Controllers
 {
-    /// <summary>
-    /// Controller to manage the users.
-    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   A controller for handling manages. </summary>
+    ///
+    /// <remarks>   Administrator, 12/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        /// <summary>   Manager for user. </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>   Manager for sign in. </summary>
         private readonly SignInManager<ApplicationUser> _signInManager;
+        /// <summary>   The email sender. </summary>
         private readonly IEmailSender _emailSender;
+        /// <summary>   The logger. </summary>
         private readonly ILogger _logger;
+        /// <summary>   The URL encoder. </summary>
         private readonly UrlEncoder _urlEncoder;
 
+        /// <summary>   The authenicator URI format. </summary>
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
-        /// <summary>
-        /// The constructor preparing the basic stuff.
-        /// </summary>
-        /// <param name="userManager">Object to work on.</param>
-        /// <param name="signInManager">Signin manager to work on.</param>
-        /// <param name="emailSender">Email sender to use when needed.</param>
-        /// <param name="logger">Logger to be used wen needed.</param>
-        /// <param name="urlEncoder">Encoder for the url when needed.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Constructor. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="userManager">      Manager for user. </param>
+        /// <param name="signInManager">    Manager for sign in. </param>
+        /// <param name="emailSender">      The email sender. </param>
+        /// <param name="logger">           The logger. </param>
+        /// <param name="urlEncoder">       The URL encoder. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
@@ -52,16 +78,25 @@ namespace NNMetrics.Controllers
             _urlEncoder = urlEncoder;
         }
 
-        /// <summary>
-        /// String to use for status messages.
-        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets or sets a message describing the status. </summary>
+        ///
+        /// <value> A message describing the status. </value>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        /// Page to get the basic user data of the loged in user.
-        /// </summary>
-        /// <returns>Returns the page with the model with the data of the given user.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) gets the index. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -83,11 +118,18 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// The model of the current user to work on.
-        /// </summary>
-        /// <param name="model">Model with the user data.</param>
-        /// <returns>The page with the data from the model of user data.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) indexes the given model. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
@@ -127,11 +169,18 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        /// <summary>
-        /// Method to send verification email when needed.
-        /// </summary>
-        /// <param name="model">The model with user data.</param>
-        /// <returns>Page with the send verification email information.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) sends a verification email. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
@@ -156,10 +205,16 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        /// <summary>
-        /// Method to change password of user.
-        /// </summary>
-        /// <returns>Page to change the password.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) change password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
@@ -179,11 +234,18 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Change password for the current user.
-        /// </summary>
-        /// <param name="model">Model of the current user for changing the password.</param>
-        /// <returns>Page with the user model to change password.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) change password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -213,10 +275,16 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(ChangePassword));
         }
 
-        /// <summary>
-        /// Set the [assword for the current user.
-        /// </summary>
-        /// <returns>Model with current user data.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) sets the password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
@@ -237,11 +305,18 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Set password for the current user.
-        /// </summary>
-        /// <param name="model">Model with user data.</param>
-        /// <returns>The page with current user model data to set password.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) sets a password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
@@ -270,11 +345,16 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(SetPassword));
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) external logins. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>
-        /// Method for external logins.
-        /// </summary>
-        /// <returns>Page with model for external logins.</returns>
         [HttpGet]
         public async Task<IActionResult> ExternalLogins()
         {
@@ -294,11 +374,16 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Method for linklogin.
-        /// </summary>
-        /// <param name="provider">Provider for the linklogin.</param>
-        /// <returns>The provider and properties to work on.</returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) links a login. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="provider"> The provider. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LinkLogin(string provider)
@@ -311,6 +396,16 @@ namespace NNMetrics.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, _userManager.GetUserId(User));
             return new ChallengeResult(provider, properties);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) links the login callback. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         public async Task<IActionResult> LinkLoginCallback()
@@ -340,6 +435,20 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(ExternalLogins));
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP POST requests) removes the login described by model.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel model)
@@ -361,6 +470,16 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(ExternalLogins));
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) two factor authentication. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
@@ -380,6 +499,16 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) disables the 2fa warning. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public async Task<IActionResult> Disable2faWarning()
         {
@@ -396,6 +525,16 @@ namespace NNMetrics.Controllers
 
             return View(nameof(Disable2fa));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) disables the 2fa. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -416,6 +555,16 @@ namespace NNMetrics.Controllers
             _logger.LogInformation("User with ID {UserId} has disabled 2fa.", user.Id);
             return RedirectToAction(nameof(TwoFactorAuthentication));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) enables the authenticator. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         public async Task<IActionResult> EnableAuthenticator()
@@ -441,6 +590,18 @@ namespace NNMetrics.Controllers
 
             return View(model);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) enables the authenticator. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">    The model with user data. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -474,11 +635,31 @@ namespace NNMetrics.Controllers
             return RedirectToAction(nameof(GenerateRecoveryCodes));
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP GET requests) resets the authenticator warning.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         public IActionResult ResetAuthenticatorWarning()
         {
             return View(nameof(ResetAuthenticator));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) resets the authenticator. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -496,6 +677,16 @@ namespace NNMetrics.Controllers
 
             return RedirectToAction(nameof(EnableAuthenticator));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Method for generating recovery code. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   Model with the informstion for resetting generating recovery code. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         public async Task<IActionResult> GenerateRecoveryCodes()
@@ -518,11 +709,17 @@ namespace NNMetrics.Controllers
 
             return View(model);
         }
-        
-        /// <summary>
-        /// Delete the user.
-        /// </summary>
-        /// <returns>Page indicating if delete was successful or not.</returns>
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Deletes this object. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public async Task<IActionResult> Delete()
         {
             ViewBag.error = "";
@@ -563,6 +760,14 @@ namespace NNMetrics.Controllers
         
         #region Helpers
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Adds the errors. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="result">   The result. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -570,6 +775,16 @@ namespace NNMetrics.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Format key. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="unformattedKey">   The unformatted key. </param>
+        ///
+        /// <returns>   The formatted key. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private string FormatKey(string unformattedKey)
         {
@@ -587,6 +802,17 @@ namespace NNMetrics.Controllers
 
             return result.ToString().ToLowerInvariant();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Generates a qr code URI. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="email">            The email. </param>
+        /// <param name="unformattedKey">   The unformatted key. </param>
+        ///
+        /// <returns>   The qr code URI. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private string GenerateQrCodeUri(string email, string unformattedKey)
         {

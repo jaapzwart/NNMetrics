@@ -13,7 +13,10 @@
 @Html.ActionLink("Chart MTTR", "UseDataFromServerMTTR", "Metrics")  - 
 @Html.ActionLink("Chart PO", "UseDataFromServerPO", "Metrics") - 
 @Html.ActionLink("Chart Completed", "UseDataFromServerCompleted", "Metrics") - 
-@Html.ActionLink("Delete all records", "DeleteAll", "Metrics")
+@Html.ActionLink("Number of deployments", "UseDataFromServerDeployments", "Metrics")
+<div style="text-align: right; width: 100%;">
+    @Html.ActionLink("Delete all records", "DeleteAll", "Metrics")
+</div>
 <table class="table">
     <thead>
         <tr>

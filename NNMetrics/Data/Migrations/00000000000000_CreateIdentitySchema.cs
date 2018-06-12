@@ -1,4 +1,10 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+// file:	Data\Migrations\00000000000000_CreateIdentitySchema.cs
+//
+// summary:	Implements the 00000000000000 create identity schema class
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,8 +13,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NNMetrics.Data.Migrations
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   A create identity schema. </summary>
+    ///
+    /// <remarks>   Administrator, 12/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public partial class CreateIdentitySchema : Migration
     {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Ups the given migration builder. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="migrationBuilder"> The migration builder. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -191,6 +211,14 @@ namespace NNMetrics.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Downs the given migration builder. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="migrationBuilder"> The migration builder. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {

@@ -1,4 +1,10 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+// file:	Models\ManageViewModels\SetPasswordViewModel.cs
+//
+// summary:	Implements the set password view model class
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,18 +12,42 @@ using System.Threading.Tasks;
 
 namespace NNMetrics.Models.ManageViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   A ViewModel for the set password. </summary>
+    ///
+    /// <remarks>   Administrator, 12/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public class SetPasswordViewModel
     {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets or sets the new password. </summary>
+        ///
+        /// <value> The new password. </value>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets or sets the confirm password. </summary>
+        ///
+        /// <value> The confirm password. </value>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets or sets a message describing the status. </summary>
+        ///
+        /// <value> A message describing the status. </value>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public string StatusMessage { get; set; }
     }

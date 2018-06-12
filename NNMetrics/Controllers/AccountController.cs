@@ -1,4 +1,10 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+// file:	Controllers\AccountController.cs
+//
+// summary:	Implements the account controller class
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -10,16 +16,44 @@ using NNMetrics.Models;
 using NNMetrics.Models.AccountViewModels;
 using NNMetrics.Services;
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// namespace: NNMetrics.Controllers
+//
+// summary:	.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace NNMetrics.Controllers
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   A controller for handling accounts. </summary>
+    ///
+    /// <remarks>   Administrator, 12/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        /// <summary>   Manager for user. </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>   Manager for sign in. </summary>
         private readonly SignInManager<ApplicationUser> _signInManager;
+        /// <summary>   The email sender. </summary>
         private readonly IEmailSender _emailSender;
+        /// <summary>   The logger. </summary>
         private readonly ILogger _logger;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Constructor. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="userManager">      Manager for user. </param>
+        /// <param name="signInManager">    Manager for sign in. </param>
+        /// <param name="emailSender">      The email sender. </param>
+        /// <param name="logger">           The logger. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -32,9 +66,25 @@ namespace NNMetrics.Controllers
             _emailSender = emailSender;
             _logger = logger;
         }
-        
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Gets or sets a message describing the error. </summary>
+        ///
+        /// <value> A message describing the error. </value>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [TempData]
         public string ErrorMessage { get; set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) login. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         [AllowAnonymous]
@@ -46,6 +96,17 @@ namespace NNMetrics.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) login. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="model">        The model. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -84,6 +145,19 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) login with 2fa. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="rememberMe">   True to remember me. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
@@ -101,6 +175,20 @@ namespace NNMetrics.Controllers
 
             return View(model);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) login with 2fa. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">        The model. </param>
+        /// <param name="rememberMe">   True to remember me. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -140,6 +228,18 @@ namespace NNMetrics.Controllers
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) login with recovery code. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
@@ -155,6 +255,19 @@ namespace NNMetrics.Controllers
 
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) login with recovery code. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">        The model. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -194,12 +307,30 @@ namespace NNMetrics.Controllers
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) gets the lockout. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
         {
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) registers this object. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         [AllowAnonymous]
@@ -208,6 +339,17 @@ namespace NNMetrics.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) registers this object. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="model">        The model. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -238,6 +380,14 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) logout. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -246,6 +396,17 @@ namespace NNMetrics.Controllers
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) external login. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="provider">     The provider. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -257,6 +418,19 @@ namespace NNMetrics.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP GET requests) callback, called when the external login.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        /// <param name="remoteError">  (Optional) The remote error. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         [AllowAnonymous]
@@ -294,6 +468,19 @@ namespace NNMetrics.Controllers
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) external login confirmation. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="model">        The model. </param>
+        /// <param name="returnUrl">    (Optional) URL of the return. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -326,6 +513,19 @@ namespace NNMetrics.Controllers
             return View(nameof(ExternalLogin), model);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) confirm email. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="userId">   Identifier for the user. </param>
+        /// <param name="code">     The code. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -343,12 +543,30 @@ namespace NNMetrics.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) forgot password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP POST requests) forgot password. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="model">    The model. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -377,12 +595,34 @@ namespace NNMetrics.Controllers
             return View(model);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) forgot password confirmation. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP GET requests) resets the password described by code.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <exception cref="ApplicationException"> Thrown when an Application error condition occurs. </exception>
+        ///
+        /// <param name="code"> (Optional) The code. </param>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         [AllowAnonymous]
@@ -395,6 +635,18 @@ namespace NNMetrics.Controllers
             var model = new ResetPasswordViewModel { Code = code };
             return View(model);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP POST requests) resets the password described by model.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="model">    The model. </param>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpPost]
         [AllowAnonymous]
@@ -420,6 +672,16 @@ namespace NNMetrics.Controllers
             return View();
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// (An Action that handles HTTP GET requests) resets the password confirmation.
+        /// </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
@@ -427,6 +689,13 @@ namespace NNMetrics.Controllers
             return View();
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   (An Action that handles HTTP GET requests) access denied. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet]
         public IActionResult AccessDenied()
@@ -436,6 +705,14 @@ namespace NNMetrics.Controllers
 
         #region Helpers
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Adds the errors. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="result">   The result. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -443,6 +720,16 @@ namespace NNMetrics.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Redirect to local. </summary>
+        ///
+        /// <remarks>   Administrator, 12/06/2018. </remarks>
+        ///
+        /// <param name="returnUrl">    URL of the return. </param>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
