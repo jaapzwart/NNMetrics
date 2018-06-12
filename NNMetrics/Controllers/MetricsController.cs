@@ -96,7 +96,7 @@ namespace NNMetrics.Controllers
         /// <returns>   An IActionResult. </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public IActionResult UseDataFromServerDP()
+        public IActionResult UseDataFromServerDeployments()
         {
             ViewBag.currentUser = SharedData.userName;
             return View();
@@ -170,10 +170,12 @@ namespace NNMetrics.Controllers
         {
             SharedData._contextGlobal = _context;
             SharedData.userName = User.Identity.Name;
-            var signatures = from b in _context.Metrics
-                                       where b.userName == User.Identity.Name
-                                       select b;
-            SharedData.MetricsRecordCount = signatures.Count();
+            var signatures = from b in _context.Metrics                                      
+                             where b.userName == User.Identity.Name
+                             orderby b.ID descending
+                             select b;
+
+            SharedData.MetricsRecordCount = signatures.Count(); // used to determine if account can be deleted.
 
             //-------------------------------------------------------------------------------------------
             // Down iterations are needed to get the data used for the json charts data.
@@ -190,50 +192,70 @@ namespace NNMetrics.Controllers
             SharedData.db_mttr.Clear();
             var mttr = from b in _context.Metrics
                        where b.userName == SharedData.userName
+                       orderby b.ID descending
                        select b.MTTR;
+            int i = 0;
             foreach(var item in mttr)
             {
-                SharedData.db_mttr.Add(item);
+                if(i < 9)
+                    SharedData.db_mttr.Add(item);
+                i++;
             }
+            i = 0;
 
             // Get PO Satisfaction in an array.
             SharedData.db_PO.Clear();
             var po = from b in _context.Metrics
-                       where b.userName == SharedData.userName
-                       select b.POSatisfaction;
+                     where b.userName == SharedData.userName
+                     orderby b.ID descending
+                     select b.POSatisfaction;
             foreach (var item in po)
             {
-                SharedData.db_PO.Add(item);
+                if(i < 9)
+                    SharedData.db_PO.Add(item);
+                i++;
             }
+            i = 0;
 
             // Get Completed from planned in an array.
             SharedData.db_Completed.Clear();
             var completed = from b in _context.Metrics
-                     where b.userName == SharedData.userName
-                     select b.CompletedForecast;
+                            where b.userName == SharedData.userName
+                            orderby b.ID descending
+                            select b.CompletedForecast;
             foreach (var item in completed)
             {
-                SharedData.db_Completed.Add(item);
+                if(i < 9)
+                    SharedData.db_Completed.Add(item);
+                i++;
             }
+            i = 0;
 
             // Get the number of deployments.
             SharedData.db_dp.Clear();
             var deployments = from b in _context.Metrics
-                            where b.userName == SharedData.userName
-                            select b.NumberOfDeployments;
+                              where b.userName == SharedData.userName
+                              orderby b.ID descending
+                              select b.NumberOfDeployments;
             foreach (var item in deployments)
             {
-                SharedData.db_dp.Add(item);
+                if(i < 9)
+                    SharedData.db_dp.Add(item);
+                i++;
             }
+            i = 0;
 
             // Get Title in an array.
             SharedData.db_title.Clear();
             var title = from b in _context.Metrics
-                       where b.userName == SharedData.userName
-                       select b.Title;
+                        where b.userName == SharedData.userName
+                        orderby b.ID descending
+                        select b.Title;
             foreach(var item in title)
             {
-                SharedData.db_title.Add(item);
+                if(i < 9)
+                    SharedData.db_title.Add(item);
+                i++;
             }
 
             return View(signatures.ToList());

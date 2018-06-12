@@ -25,7 +25,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:darkorange;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,14 +34,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">NNMetrics</a>
+                <!--<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">NNMetrics</a>-->
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="background-color:darkorange;color:darkblue;">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Metrics" asp-action="Index">Metrics</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index" style="color:darkblue;">Home</a></li>
+                    <li><a asp-area="" asp-controller="Metrics" asp-action="Index" style="color:darkblue;">Metrics</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About" style="color:darkblue;">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="color:darkblue;">Contact</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
