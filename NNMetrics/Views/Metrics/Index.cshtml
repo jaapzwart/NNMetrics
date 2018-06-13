@@ -6,17 +6,15 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-@Html.ActionLink("Chart MTTR", "UseDataFromServerMTTR", "Metrics")  - 
-@Html.ActionLink("Chart PO", "UseDataFromServerPO", "Metrics") - 
-@Html.ActionLink("Chart Completed", "UseDataFromServerCompleted", "Metrics") - 
-@Html.ActionLink("Number of deployments", "UseDataFromServerDeployments", "Metrics")
-<div style="text-align: right; width: 100%;">
-    @Html.ActionLink("Delete all records", "DeleteAll", "Metrics")
-</div>
+<p>   
+    <button class="button28 button28" style="float: left;width:180px;" onclick="location.href='@Url.Action("Create", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Create new</font></button>
+</p><br /><br />
+<button class="button25 button25" style="float: left;width:180px;" onclick="location.href='@Url.Action("UseDataFromServerMTTR", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">MTTR</font></button>
+<button class="button25 button25" style="float: left;width:180px;" onclick="location.href='@Url.Action("UseDataFromServerPO", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">PO Satisfaction</font></button>
+<button class="button25 button25" style="float: left;width:180px;" onclick="location.href='@Url.Action("UseDataFromServerCompleted", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Completed of planned</font></button>
+<button class="button25 button25" style="float: left;width:180px;" onclick="location.href='@Url.Action("UseDataFromServerDeployments", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Number of deployments</font></button>
+<button class="button31 button31" style="float: right;width:150px;" onclick="location.href='@Url.Action("DeleteAll", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Delete records</font></button>
+<br /><br />
 <table class="table">
     <thead>
         <tr>

@@ -23,30 +23,30 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MeasureDate" class="control-label"></label>
-                <input asp-for="MeasureDate" class="form-control" />
-                <span asp-validation-for="MeasureDate" class="text-danger"></span>
-            </div>
+                <label asp-for="MeasureDate" class="control-label"></label> <font weight="bold" color="darkblue"></font>include the time.</font>
+    <input asp-for="MeasureDate" class="form-control" />
+    <span asp-validation-for="MeasureDate" class="text-danger"></span>
+</div>
             <div class="form-group">
-                <label asp-for="POSatisfaction" class="control-label"></label>
-                <input asp-for="POSatisfaction" class="form-control" />
-                <span asp-validation-for="POSatisfaction" class="text-danger"></span>
-            </div>
+                <label asp-for="POSatisfaction" class="control-label"></label> <font weight="bold" color="darkblue">from 0 to 5.</font>
+    <input asp-for="POSatisfaction" class="form-control" min="0" max="5" />
+    <span asp-validation-for="POSatisfaction" class="text-danger"></span>
+</div>
             <div class="form-group">
-                <label asp-for="CompletedForecast" class="control-label"></label>
-                <input asp-for="CompletedForecast" class="form-control" />
-                <span asp-validation-for="CompletedForecast" class="text-danger"></span>
-            </div>
+                <label asp-for="CompletedForecast" class="control-label"></label> <font weight="bold" color="darkblue">percentage from 0 to 100%.</font>
+    <input asp-for="CompletedForecast" class="form-control" min="0" max="100" />
+    <span asp-validation-for="CompletedForecast" class="text-danger"></span>
+</div>
             <div class="form-group">
-                <label asp-for="MTTR" class="control-label"></label>
-                <input asp-for="MTTR" class="form-control" />
+                <label asp-for="MTTR" class="control-label"></label> <font weight="bold" color="darkblue">in hours.</font>
+                <input asp-for="MTTR" class="form-control" min="0" max="500" />
                 <span asp-validation-for="MTTR" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfDeployments" class="control-label"></label>
-                <input asp-for="NumberOfDeployments" class="form-control" />
-                <span asp-validation-for="NumberOfDeployments" class="text-danger"></span>
-            </div>
+                <label asp-for="NumberOfDeployments" class="control-label"></label> <font weight="bold" color="darkblue">per day.</font>
+    <input asp-for="NumberOfDeployments" class="form-control" min="0" max="500" />
+    <span asp-validation-for="NumberOfDeployments" class="text-danger"></span>
+</div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

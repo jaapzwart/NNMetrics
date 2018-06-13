@@ -1,0 +1,1024 @@
+﻿/* 
+    ------------------------------------------------------------------------
+    Text boxes
+    ------------------------------------------------------------------------
+
+*/
+#img.source-image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.editor-field textarea {
+    width : 400px;
+    height : 100px;
+}
+.tareafor {
+    width : 400px;
+    height : 100px;
+}
+.centerGreenSeaGreen {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid darkgreen;
+    background-color:darkseagreen;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenLightGreen {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid darkgreen;
+    background-color:lightgreen;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenSeaGreenOpac {
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px rgba(68,68,68,0.4);
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid darkgreen;
+    background: rgba(200, 30, 30, 0.1);
+    color:rgba(0,0,139,0.6);
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenSeaGreenOpacWorldMap {
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px rgba(68,68,68,0.4);
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    background-image: url("/images/solltrhuknow.png");
+    width:auto;
+    border: 3px solid darkgreen;
+    background: rgba(200, 30, 30, 0.1);
+    color:rgba(0,0,139,0.6);
+    font-weight:bold;
+    padding: 10px;
+}
+.GreenTitle {
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:left;
+    font-family:Tahoma;
+    background-color:lightblue;
+    /*text-justify:distribute-all-lines;*/
+    /*background-image: url("../../Pics/oldpaperTitle.jpg");*/
+    width: 80%;
+    border: 3px solid black;
+    color:Black;
+    padding: 10px;
+}
+.GreenTitleWidth250 {
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    font-family:Tahoma;
+    background-color:lightyellow;
+    /*text-justify:distribute-all-lines;*/
+    /*background-image: url("../../Pics/oldpaperTitle.jpg");*/
+    width: 250px;
+    border: 3px solid black;
+    color: darkblue;
+    padding: 10px;
+}
+.GreenTitleBackground {
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid black;
+    background-color:darkgray;
+    color:white;
+    padding: 10px;
+}
+.centerGreenBisquePrint {
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    color:darkblue;
+    padding: 10px;
+}
+.centerGreenBisqueTitle {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid black;
+    background-color:gold;
+    color:darkblue;
+    padding: 10px;
+}
+.centerGreenNominalEmail {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: center;
+    text-justify: distribute-all-lines;
+    width: 80%;
+    border: 3px solid green;
+    background-color:antiquewhite;
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+
+.centerGreenBisque {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid darkgreen;
+    background-color:bisque;
+    color:darkblue;
+    padding: 10px;
+}
+.centerWhiteWithoutBorder {
+    border-radius: 25px;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    color:darkblue;
+    padding: 10px;
+}
+.centerRedOrangeRed {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid red;
+    background-color:indianred;
+    color:white;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreyNotAuthorized {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid red;
+    background-color:lightgrey;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerOrangeOrangeRed {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:center;
+    text-justify:distribute-all-lines;
+    width: 80%;
+    border: 3px solid red;
+    background-color:orange;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenNominal {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: center;
+    text-justify: distribute-all-lines;
+    width: 80%;
+    border: 3px solid green;
+    background-color:darkkhaki;
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerRedTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width: 30px;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/red.png');
+    color: yellow;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerOrangeTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width: 30px;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/orange.png');
+    color: yellow;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerlightGreenTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width: 30px;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/lightgreen.png');
+    color: darkred;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width: 30px;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/green.png');
+    color: yellow;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerScrumElementsTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width:auto;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/lightblue.png');
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerNominalTableTd {
+    /*border-radius: 25px;*/
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: left;
+    text-justify: distribute-all-lines;
+    width: 30px;
+    border: 3px solid black;
+    background-color: black;
+    background-image:url('../images/yellow.png');
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.divShadow {
+    box-shadow: 10px 10px 5px #888888;
+}
+.OutlineText {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    color: white;
+    text-shadow:
+    /* Outline */
+    -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, -2px 0 0 #000000, 2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000; /* Terminate with a semi-colon */
+}
+
+.OutlineTextSecond {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 64px;
+    color: white;
+    text-shadow:
+    /* Outline 1 */
+    -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, -2px 0 0 #000000, 2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000,
+    /* Outline 2 */
+    -2px -2px 0 #ff0000, 2px -2px 0 #ff0000, -2px 2px 0 #ff0000, 2px 2px 0 #ff0000, -3px 0 0 #ff0000, 3px 0 0 #ff0000, 0 3px 0 #ff0000, 0 -3px 0 #ff0000; /* Terminate with a semi-colon */
+}
+table.gridtable {
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	width: 80%;
+    border: 3px solid black;
+    background-color:darkkhaki;
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+table.gridtable th {
+	border-width: 2px;
+	padding: 8px;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+    font-weight:bold;
+}
+table.gridtable td {
+	border-width: 2px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color:lightyellow;
+    font-weight:bold;
+}
+
+/*
+    Popup
+*/
+body {
+  font-family: Arial, sans-serif;
+  background: url(4.jpg);
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: orange;
+  margin: 100px 0;
+}
+
+.box {
+  width: 20%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+/*
+    PopUp in Info
+*/
+
+.popup {
+  margin: 70px auto;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  width: 80%;
+  height: 25%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  /*transition: all 10ms;*/
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: orange;
+}
+.popup .content {
+  height: 100%;
+  margin: auto;
+  overflow: auto;
+}
+/*
+    -------------------------------------------------------------------------
+*/
+
+/*
+    Button
+*/
+ .button {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-decoration: none;
+}
+ .button25 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:lightgreen;
+    border-bottom-style:solid;
+    border-bottom-width:thin;
+    border-color:darkgreen;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size:14px;
+    text-decoration: none;
+    color:darkblue;
+}
+
+ .button_1 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    width:250px;
+    text-decoration: none;
+}
+
+  .buttonPayPal1 {
+    /*border-radius: 25px;*/
+    height: 38px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-decoration: none;
+    background-image: url("../images/paypalbut1.png");
+    background-size: 100%;
+    width:200px;
+}
+  .buttonPayPal2 {
+    /*border-radius: 25px;*/
+    height: 38px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-decoration: none;
+    background-image: url("../images/paypalbut2.png");
+    background-size: 100%;
+    width:200px;
+}
+  .buttonPayPal1:hover {
+    background-image: url("../images/paypalbut2.png");
+    background-size: 100%;
+}
+
+  
+.button:hover {
+  background: orange;
+}
+.button:active {
+  background-color:lightblue;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button1:hover {
+  background: orange;
+}
+
+ .button20 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+ .button21 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:darkolivegreen;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.button28 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:lightgray;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.button30 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:darkgray;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.button31 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:darkorange;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.button29 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:lightblue;
+    color:darkblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+ .button22 {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:cornflowerblue;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    width: 200px;
+    font-weight: bold;
+    text-decoration: none;
+}
+ .button22:active {
+  background-color:lightblue;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+ .buttonRed {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:red;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.buttonRed {
+    background-color: red;
+    color: yellow;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid darkorange;
+}
+.buttonRed:hover {
+    background-color:yellow;
+    color:blue;
+}
+.buttonRed:active {
+  background-color:darkorange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+ .buttonOrange {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color: orange;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+ .buttonOrange {
+    background-color: orange;
+    color: darkblue;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid darkred;
+}
+ .buttonOrange:hover {
+    background-color:yellow;
+    color:blue;
+}
+ .buttonOrange:active {
+  background-color:darkorange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+ .buttonLightGreen:active {
+  background-color:lightgray;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ .buttonGreen:active {
+  background-color:darkorange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ .buttonNominal {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color:bisque;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+  .buttonNominal {
+    background-color:bisque;
+    color: darkblue;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid darkgreen;
+}
+  .buttonNominal:hover {
+    background-color:yellow;
+    color:blue;
+}
+  .buttonNominal:active {
+  background-color:darkgoldenrod;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ .buttonLightGreen {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color: lightgreen;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+  .buttonLightGreen {
+    background-color: lightgreen;
+    color: darkblue;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid darkgreen;
+}
+  .buttonLightGreen:hover {
+    background-color:yellow;
+    color:blue;
+}
+  .buttonGreen:active {
+  background-color:green;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+  .buttonLightGreen:active {
+  background-color:lightgray;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ .buttonGreen {
+    border-radius: 25px;
+    height: 30px;
+    /*padding: 10px;*/
+    background-color: green;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+  .buttonGreen {
+    background-color: green;
+    color: Yellow;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid lightgreen;
+}
+  .buttonGreen:hover {
+    background-color:yellow;
+    color:blue;
+}
+  .buttonGreen:active {
+  background-color:lightgreen;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+  
+.button20:hover {
+  background: orange;
+}
+
+.button1 {
+    background-color:lightyellow;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+.button1:active {
+  background-color:orange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button21 {
+    background-color:lightgreen;
+    color: darkblue;
+    border: 2px solid #4CAF50;
+}
+.button21:active {
+  background-color:green;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button25:active {
+  background-color:green;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button28 {
+    background-color:lightgray;
+    color: darkblue;
+    border: 2px solid #4CAF50;
+}
+.button28:active {
+  background-color:darkgray;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button29 {
+    background-color:lightblue;
+    color:darkblue;
+    border: 2px solid #4CAF50;
+}
+.button29:active {
+  background-color:orange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button30 {
+    background-color:darkgray;
+    color:yellow;
+    border: 2px solid #4CAF50;
+}
+.button30:active {
+  background-color:lightgray;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button31 {
+    background-color:darkorange;
+    color:yellow;
+    border: 2px solid #4CAF50;
+}
+.button31:active {
+  background-color:orange;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button3 {
+    background-color:lightyellow;
+    color: black;
+    width: 200px;
+    border: 2px solid #4CAF50;
+}
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.button1:active {
+  background-color:lightgreen;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button21:hover {
+    background-color:yellow;
+    color:blue;
+}
+.button28:hover {
+    background-color:yellow;
+    color:blue;
+}
+.button29:hover {
+    background-color:yellow;
+    color:blue;
+}
+.button30:hover {
+    background-color:yellow;
+    color:darkblue;
+}
+.button31:hover {
+    background-color:yellow;
+    color:darkblue;
+}
+.button25:hover {
+    background-color:yellow;
+    color:blue;
+}
+hr {
+  color: black;
+}
+
+/*
+    Example text popups
+*/
+ /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: white;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 1px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+/*
+    Other button CSS
+*/
+/*.button {
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+.button2 {
+    background-color:green;
+    color: yellow;
+    font-weight: bold;
+    width: 250px;
+    border: 2px solid #4CAF50;
+}
+
+    .button1:hover {
+        background-color:greenyellow;
+        color:darkgreen;
+        font-weight:bold;
+    }*/
+
+.centerRedOrangeRedJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid red;
+    background-color:indianred;
+    color:white;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerOrangeOrangeRedJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid red;
+    background-color:orange;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenNominalJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: justify;
+    /*text-justify: distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid green;
+    background-color:darkkhaki;
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenNominalJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin: 4px 7px 2px 4px;
+    text-align: justify;
+    /*text-justify: distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid green;
+    background-color:darkkhaki;
+    color: darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenSeaGreenJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid darkgreen;
+    background-color:darkseagreen;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+.centerGreenLightGreenJustify {
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px #888888;
+    margin:4px 7px 2px 4px;
+    text-align:justify;
+    /*text-justify:distribute-all-lines;*/
+    width: 80%;
+    border: 3px solid darkgreen;
+    background-color:lightgreen;
+    color:darkblue;
+    font-weight:bold;
+    padding: 10px;
+}
+
+/*------------------------------------------------------*/

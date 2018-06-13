@@ -17,8 +17,9 @@
                     title: "Bar Chart MTTR",
                     width: 800,
                     height: 600,
+                    vAxis: { textPosition: 'none' },
                 };
-                chart = new google.visualization.BarChart(document.getElementById('chart1'));
+                chart = new google.visualization.BarChart(document.getElementById('chart1'));             
                 chart.draw(data, option);                
             })
         }
