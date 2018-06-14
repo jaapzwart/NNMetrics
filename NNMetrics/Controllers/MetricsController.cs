@@ -168,6 +168,8 @@ namespace NNMetrics.Controllers
 
         public IActionResult Index()
         {
+            if(SharedData.userName.Equals(""))
+                return RedirectToAction("Login", "Account");
             SharedData._contextGlobal = _context;
             SharedData.userName = User.Identity.Name;
             var signatures = from b in _context.Metrics                                      

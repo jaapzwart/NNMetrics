@@ -122,6 +122,7 @@ namespace NNMetrics.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    Data.SharedData.userName = model.Email;
                     return RedirectToAction("index", "Metrics");
                     //return RedirectToLocal(returnUrl);
                 }
@@ -393,6 +394,7 @@ namespace NNMetrics.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            Data.SharedData.userName = "";
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

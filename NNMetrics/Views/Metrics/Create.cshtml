@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
 <h2>Create</h2>
 @ViewBag.currentUser
 <h4>Metrics</h4>
@@ -48,14 +48,14 @@
     <span asp-validation-for="NumberOfDeployments" class="text-danger"></span>
 </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" style="float: left;" class="button28 button28" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <button class="button21 button21" style="float: left;width:180px;" onclick="location.href='@Url.Action("Index", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Back to list</font></button>
 </div>
 
 @section Scripts {

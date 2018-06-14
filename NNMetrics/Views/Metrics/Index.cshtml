@@ -66,10 +66,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfDeployments)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            <td>                
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Edit", "Metrics", new { id = item.ID })';return false;">Edit</button>
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Details", "Metrics", new { id = item.ID })';return false;">Details</button>
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Metrics", new { id = item.ID })';return false;">Delete</button>                
             </td>
         </tr>
 }
