@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-NNMetrics-0EF7A3CE-C64C-4B71-B620-8D83FC05FF5E</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/6e9116f2-fae3-4941-aaad-ac4107485f74/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/NNMetrics</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/6e9116f2-fae3-4941-aaad-ac4107485f74/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/NNMetrics</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,6 +13,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
@@ -26,6 +29,10 @@
   <ItemGroup>
     <Folder Include="scripts\" />
     <Folder Include="Views\Chart\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
