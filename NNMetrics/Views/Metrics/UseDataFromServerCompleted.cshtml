@@ -13,7 +13,7 @@
             $.get('JsonDataCompleted', function (jsonData) {
                 data = google.visualization.arrayToDataTable(jsonData, false);
                 var option = {
-                    title: "Bar Chart Completed from Planned",
+                    title: "Bar Chart Completed from Planned - Only last 9 Sprints are visible",
                     width: 800,
                     height: 600,
                     vAxis: { textPosition: 'none' },

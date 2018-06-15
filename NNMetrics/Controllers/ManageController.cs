@@ -114,8 +114,26 @@ namespace NNMetrics.Controllers
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
+            ViewBag.admin = SharedData.userName;
 
             return View(model);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   List users. </summary>
+        ///
+        /// <remarks>   Administrator, 15/06/2018. </remarks>
+        ///
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public IActionResult ListUsers()
+        {
+            var listusers = from b in _userManager.Users
+                             select b;
+            
+            return View(listusers.ToList());
+
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////

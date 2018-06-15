@@ -5,9 +5,13 @@
 }
 
 <h4>@ViewData["Title"]</h4>
-
+<link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
 @Html.Partial("_StatusMessage", Model.StatusMessage)
-@Html.ActionLink("Delete user and data", "Delete", "Manage")
+@if (ViewBag.admin == "admin@admin.com")
+{
+    <button class="button28 button28" style="width:180px;" onclick="location.href='@Url.Action("ListUsers", "Manage")';return false;"><font style="font-weight:bold;font-size:12px;">List users</font></button>
+}
+<button class="button31 button31" style="width:180px;" onclick="location.href='@Url.Action("Delete", "Manage")';return false;"><font style="font-weight:bold;font-size:12px;">Delete</font></button>
 <div class="row">
     <div class="col-md-6">
         <form method="post">

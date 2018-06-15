@@ -13,7 +13,7 @@
             $.get('JsonDataDP', function (jsonData) {
                 data = google.visualization.arrayToDataTable(jsonData, false);
                 var option = {
-                    title: "Bar Chart Number of Deployments",
+                    title: "Bar Chart Number of Deployments - Only last 9 Sprints are visible",
                     width: 800,
                     height: 600,
                     vAxis: { textPosition: 'none' },

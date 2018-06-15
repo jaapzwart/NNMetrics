@@ -123,8 +123,12 @@ namespace NNMetrics.Controllers
                 {
                     _logger.LogInformation("User logged in.");
                     Data.SharedData.userName = model.Email;
-                    return RedirectToAction("index", "Metrics");
-                    //return RedirectToLocal(returnUrl);
+
+                    if(Data.SharedData.userName != "admin@admin.com")
+                    {
+                        return RedirectToAction("index", "Metrics");
+                    }
+                    return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
