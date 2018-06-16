@@ -39,5 +39,7 @@ namespace NNMetrics.Data
         public static List<int> db_dp = new List<int>();
         /// <summary>   Number of metrics records. </summary>
         public static int MetricsRecordCount = 0;
+        /// <summary>   Name of the admin user. </summary>
+        public static string adminUserName = "";
     }
 }

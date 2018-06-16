@@ -159,6 +159,20 @@ namespace NNMetrics.Controllers
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Index set u ser name. </summary>
+        ///
+        /// <remarks>   Administrator, 16/06/2018. </remarks>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public IActionResult IndexSetUSerName(string userName)
+        {
+            SharedData.userName = userName;
+            return RedirectToAction(nameof(MetricsController.Index), "Metrics");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   Gets the index. </summary>
         ///
         /// <remarks>   Administrator, 12/06/2018. </remarks>
@@ -168,12 +182,15 @@ namespace NNMetrics.Controllers
 
         public IActionResult Index()
         {
-            if(SharedData.userName.Equals(""))
+            if (SharedData.userName.Contains("admin"))
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            if (SharedData.userName.Equals(""))
                 return RedirectToAction("Login", "Account");
             SharedData._contextGlobal = _context;
-            SharedData.userName = User.Identity.Name;
+            if(SharedData.userName.Equals(""))
+                SharedData.userName = User.Identity.Name;
             var signatures = from b in _context.Metrics                                      
-                             where b.userName == User.Identity.Name
+                             where b.userName == SharedData.userName
                              orderby b.ID descending
                              select b;
 
@@ -300,7 +317,7 @@ namespace NNMetrics.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.currentUser = User.Identity.Name;
+            ViewBag.currentUser = SharedData .userName;
             return View();
         }
 

@@ -12,10 +12,11 @@
     <button class="button28 button28" style="width:180px;" onclick="location.href='@Url.Action("ListUsers", "Manage")';return false;"><font style="font-weight:bold;font-size:12px;">List users</font></button>
 }
 <button class="button31 button31" style="width:180px;" onclick="location.href='@Url.Action("Delete", "Manage")';return false;"><font style="font-weight:bold;font-size:12px;">Delete</font></button>
+<br />
 <div class="row">
     <div class="col-md-6">
         <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div ap-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />

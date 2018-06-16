@@ -5,7 +5,7 @@
 }
 
 <h2>ListUsers</h2>
-
+<link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -66,7 +66,7 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                <button class="button25 button25" style="float: left;width:300px;" onclick="location.href='@Url.Action("IndexSetUserName", "Metrics", new { userName = item.Email })';return false;"><font style="font-weight:bold;font-size:12px;">@Html.DisplayFor(modelItem => item.UserName)</font></button>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NormalizedUserName)

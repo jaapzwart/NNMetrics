@@ -114,7 +114,7 @@ namespace NNMetrics.Controllers
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
-            ViewBag.admin = SharedData.userName;
+            ViewBag.admin = SharedData.adminUserName;
 
             return View(model);
         }
