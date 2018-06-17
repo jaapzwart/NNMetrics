@@ -12,11 +12,12 @@
 <table class="table">
     <thead>
         <tr>
+                
                 <th>
-                    @Html.DisplayNameFor(model => model.UserName)
+                    Actions
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NormalizedUserName)
+                    @Html.DisplayNameFor(model => model.UserName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
@@ -61,9 +62,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <!--
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Edit", "Manage", new { id = item.Id })';return false;">Edit</button>
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Details", "Manage", new { id = item.Id })';return false;">Details</button>
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Manage", new { id = item.Id })';return false;">Delete</button>
+                -->
             </td>
             <td>
                 <button class="button25 button25" style="float: left;width:300px;" onclick="location.href='@Url.Action("IndexSetUserName", "Metrics", new { userName = item.Email })';return false;"><font style="font-weight:bold;font-size:12px;">@Html.DisplayFor(modelItem => item.UserName)</font></button>

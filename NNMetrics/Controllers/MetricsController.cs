@@ -277,6 +277,7 @@ namespace NNMetrics.Controllers
                 i++;
             }
 
+            ViewBag.userName = SharedData.userName;
             return View(signatures.ToList());
         }
 

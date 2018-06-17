@@ -377,6 +377,13 @@ namespace NNMetrics.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+
+                    Data.SharedData.userName = model.Email;
+                    Data.SharedData.adminUserName = model.Email;
+                    if (Data.SharedData.userName != "admin@admin.com")
+                    {
+                        return RedirectToAction("index", "Metrics");
+                    }
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
