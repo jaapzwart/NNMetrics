@@ -11,9 +11,10 @@ using System;
 namespace NNMetrics.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180618084427_newfields18062018_2")]
+    partial class newfields18062018_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,12 +194,6 @@ namespace NNMetrics.Data.Migrations
                     b.Property<int>("NumberOfDeployments");
 
                     b.Property<int>("POSatisfaction");
-
-                    b.Property<string>("ProductOwner");
-
-                    b.Property<string>("ScrumMaster");
-
-                    b.Property<string>("TeamName");
 
                     b.Property<string>("Title");
 

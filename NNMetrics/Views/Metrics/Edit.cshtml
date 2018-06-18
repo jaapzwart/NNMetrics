@@ -19,10 +19,25 @@
                 <span asp-validation-for="userName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TeamName" class="control-label"></label>
+                <input asp-for="TeamName" class="form-control" readonly />
+                <span asp-validation-for="TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="ProductOwner" class="control-label"></label>
+                <input asp-for="ProductOwner" class="form-control" />
+                <span asp-validation-for="ProductOwner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScrumMaster" class="control-label"></label>
+                <input asp-for="ScrumMaster" class="form-control" />
+                <span asp-validation-for="ScrumMaster" class="text-danger"></span>
+            </div> 
             <div class="form-group">
                 <label asp-for="MeasureDate" class="control-label"></label>
                 <input asp-for="MeasureDate" class="form-control" />

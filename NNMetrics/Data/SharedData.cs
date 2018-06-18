@@ -41,5 +41,11 @@ namespace NNMetrics.Data
         public static int MetricsRecordCount = 0;
         /// <summary>   Name of the admin user. </summary>
         public static string adminUserName = "";
+        /// <summary>   Name of the team. </summary>
+        public static string teamName = "";
+        /// <summary>   The owner of the product. </summary>
+        public static string productOwner = "";
+        /// <summary>   The scrum master. </summary>
+        public static string scrumMaster = "";
     }
 }

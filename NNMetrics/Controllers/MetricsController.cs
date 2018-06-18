@@ -343,6 +343,9 @@ namespace NNMetrics.Controllers
             {
                 _context.Add(metrics);
                 await _context.SaveChangesAsync();
+                SharedData.productOwner = metrics.ProductOwner;
+                SharedData.scrumMaster = metrics.ScrumMaster;
+                SharedData.teamName = metrics.TeamName;
                 return RedirectToAction(nameof(Index));
             }
             
@@ -371,6 +374,7 @@ namespace NNMetrics.Controllers
             {
                 return NotFound();
             }
+            ViewBag.TeamName = SharedData.teamName;
             return View(metrics);
         }
 
