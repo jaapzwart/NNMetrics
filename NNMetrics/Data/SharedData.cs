@@ -49,5 +49,8 @@ namespace NNMetrics.Data
         public static string productOwner = "";
         /// <summary>   The scrum master. </summary>
         public static string scrumMaster = "";
+        /// <summary>   The error delete teams. </summary>
+        public static string ErrorDeleteTeams = "";
+        public static int ErrorDeleteTeamsCounter = 0;
     }
 }

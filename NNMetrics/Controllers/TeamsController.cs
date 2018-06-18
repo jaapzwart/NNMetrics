@@ -62,6 +62,19 @@ namespace NNMetrics.Controllers
             SharedData.TeamsRecordCount = signatures.Count();
             ViewBag.userName = SharedData.userName;
 
+            // Stupid way to reset teams delete error, but not enough time for the proper solution.
+            // TODO: implement better solution to check of we come here second time after detecting false team delete.
+            if (SharedData.ErrorDeleteTeams.Length > 0 && SharedData.ErrorDeleteTeamsCounter < 1)
+            {
+                ViewBag.Error = SharedData.ErrorDeleteTeams;
+                SharedData.ErrorDeleteTeamsCounter += 1;
+            }
+            else
+            {
+                ViewBag.Error = "";
+                SharedData.ErrorDeleteTeams = "";
+                SharedData.ErrorDeleteTeamsCounter = 0;
+            }
             return View(await signatures.ToListAsync());
         }
 
@@ -251,6 +264,18 @@ namespace NNMetrics.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var teams = await _context.Teams.SingleOrDefaultAsync(m => m.ID == id);
+            SharedData.teamName = teams.teamName;
+            var signatures = from b in _context.Metrics
+                             where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
+                             orderby b.ID descending
+                             select b;
+            if(signatures.Count() > 0)
+            {
+                SharedData.ErrorDeleteTeams = "Still metric records available. Delete them first.";
+                return RedirectToAction("Index", "Teams");
+            }
+            SharedData.ErrorDeleteTeams = "";
+
             _context.Teams.Remove(teams);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
