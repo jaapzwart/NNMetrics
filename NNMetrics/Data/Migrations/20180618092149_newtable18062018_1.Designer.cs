@@ -11,9 +11,10 @@ using System;
 namespace NNMetrics.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180618092149_newtable18062018_1")]
+    partial class newtable18062018_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,20 +208,6 @@ namespace NNMetrics.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Metrics");
-                });
-
-            modelBuilder.Entity("NNMetrics.Models.Teams", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("teamName");
-
-                    b.Property<string>("userName");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -127,7 +127,7 @@ namespace NNMetrics.Controllers
 
                     if(Data.SharedData.userName != "admin@admin.com")
                     {
-                        return RedirectToAction("index", "Metrics");
+                        return RedirectToAction("index", "Teams");
                     }
                     return RedirectToLocal(returnUrl);
                 }

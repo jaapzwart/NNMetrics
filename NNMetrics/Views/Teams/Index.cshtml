@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NNMetrics.Models.Teams>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index for user - @ViewBag.userName</h2>
+<link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
+<p>
+    <button class="button28 button28" style="float: left;width:180px;" onclick="location.href='@Url.Action("Create", "Teams")';return false;"><font style="font-weight:bold;font-size:12px;">Create new</font></button>
+</p><br /><br />
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.userName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.teamName)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.teamName)
+            </td>
+            <td>
+                <!--
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Edit", "Teams", new { id = item.ID })';return false;">Edit</button>
+                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Details", "Teams", new { id = item.ID })';return false;">Details</button>
+                -->
+                <button class="button31 button31" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Teams", new { id = item.ID })';return false;">Delete</button>
+                <button class="button28 button28" style="width:100px;" onclick="location.href='@Url.Action("IndexFromTeams", "Metrics", new { teamName = item.teamName } )';return false;">GoTo Metrics</button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -169,6 +169,22 @@ namespace NNMetrics.Controllers
         public IActionResult IndexSetUSerName(string userName)
         {
             SharedData.userName = userName;
+            return RedirectToAction(nameof(MetricsController.Index), "Teams");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Index from teams. </summary>
+        ///
+        /// <remarks>   Administrator, 18/06/2018. </remarks>
+        ///
+        /// <param name="teamName"> Name of the team. </param>
+        ///
+        /// <returns>   An IActionResult. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public IActionResult IndexFromTeams(string teamName)
+        {
+            SharedData.teamName = teamName;
             return RedirectToAction(nameof(MetricsController.Index), "Metrics");
         }
 
@@ -189,8 +205,9 @@ namespace NNMetrics.Controllers
             SharedData._contextGlobal = _context;
             if(SharedData.userName.Equals(""))
                 SharedData.userName = User.Identity.Name;
+
             var signatures = from b in _context.Metrics                                      
-                             where b.userName == SharedData.userName
+                             where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                              orderby b.ID descending
                              select b;
 
@@ -211,7 +228,7 @@ namespace NNMetrics.Controllers
             // Get MTTR in an array.
             SharedData.db_mttr.Clear();
             var mttr = from b in _context.Metrics
-                       where b.userName == SharedData.userName
+                       where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                        orderby b.ID descending
                        select b.MTTR;
             int i = 0;
@@ -226,7 +243,7 @@ namespace NNMetrics.Controllers
             // Get PO Satisfaction in an array.
             SharedData.db_PO.Clear();
             var po = from b in _context.Metrics
-                     where b.userName == SharedData.userName
+                     where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                      orderby b.ID descending
                      select b.POSatisfaction;
             foreach (var item in po)
@@ -240,7 +257,7 @@ namespace NNMetrics.Controllers
             // Get Completed from planned in an array.
             SharedData.db_Completed.Clear();
             var completed = from b in _context.Metrics
-                            where b.userName == SharedData.userName
+                            where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                             orderby b.ID descending
                             select b.CompletedForecast;
             foreach (var item in completed)
@@ -254,7 +271,7 @@ namespace NNMetrics.Controllers
             // Get the number of deployments.
             SharedData.db_dp.Clear();
             var deployments = from b in _context.Metrics
-                              where b.userName == SharedData.userName
+                              where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                               orderby b.ID descending
                               select b.NumberOfDeployments;
             foreach (var item in deployments)
@@ -268,7 +285,7 @@ namespace NNMetrics.Controllers
             // Get Title in an array.
             SharedData.db_title.Clear();
             var title = from b in _context.Metrics
-                        where b.userName == SharedData.userName
+                        where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                         orderby b.ID descending
                         select b.Title;
             foreach(var item in title)
@@ -279,6 +296,7 @@ namespace NNMetrics.Controllers
             }
 
             ViewBag.userName = SharedData.userName;
+            ViewBag.teamName = SharedData.teamName;
             return View(signatures.ToList());
         }
 
@@ -320,6 +338,7 @@ namespace NNMetrics.Controllers
         public IActionResult Create()
         {
             ViewBag.currentUser = SharedData.userName;
+            ViewBag.teamName = SharedData.teamName;
             return View();
         }
 
