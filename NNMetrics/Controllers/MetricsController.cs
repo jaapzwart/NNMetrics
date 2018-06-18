@@ -206,6 +206,7 @@ namespace NNMetrics.Controllers
             // Now you have:
             // Index --> SharedData class --> Model.Helper --> controller methods --> View
             //-------------------------------------------------------------------------------------------
+            // TODO: create a more elegant version of down code with changes to clumsy model code.
 
             // Get MTTR in an array.
             SharedData.db_mttr.Clear();
@@ -318,7 +319,7 @@ namespace NNMetrics.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.currentUser = SharedData .userName;
+            ViewBag.currentUser = SharedData.userName;
             return View();
         }
 
@@ -336,7 +337,7 @@ namespace NNMetrics.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,userName,Title,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
+        public async Task<IActionResult> Create([Bind("ID,ProductOwner,ScrumMaster,TeamName,userName,Title,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
         {
             if (ModelState.IsValid)
             {
@@ -345,7 +346,7 @@ namespace NNMetrics.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            return View(metrics);
+            return View(model: metrics);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -389,7 +390,7 @@ namespace NNMetrics.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,userName,Title,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,userName,Title,ProductOwner,ScrumMaster,TeamName,MeasureDate,POSatisfaction,CompletedForecast,MTTR,NumberOfDeployments")] Metrics metrics)
         {
             if (id != metrics.ID)
             {
