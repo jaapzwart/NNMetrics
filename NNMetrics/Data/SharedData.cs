@@ -51,6 +51,7 @@ namespace NNMetrics.Data
         public static string scrumMaster = "";
         /// <summary>   The error delete teams. </summary>
         public static string ErrorDeleteTeams = "";
+        /// <summary>   The error delete teams counter. </summary>
         public static int ErrorDeleteTeamsCounter = 0;
     }
 }

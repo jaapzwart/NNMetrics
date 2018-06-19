@@ -6,16 +6,9 @@
 
 <h2>ListUsers</h2>
 <link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-                
-                <th>
-                    Actions
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UserName)
                 </th>
@@ -61,13 +54,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                <!--
-                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Edit", "Manage", new { id = item.Id })';return false;">Edit</button>
-                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Details", "Manage", new { id = item.Id })';return false;">Details</button>
-                <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Manage", new { id = item.Id })';return false;">Delete</button>
-                -->
-            </td>
             <td>
                 <button class="button25 button25" style="float: left;width:300px;" onclick="location.href='@Url.Action("IndexSetUserName", "Metrics", new { userName = item.Email })';return false;"><font style="font-weight:bold;font-size:12px;">@Html.DisplayFor(modelItem => item.UserName)</font></button>
             </td>

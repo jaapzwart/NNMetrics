@@ -125,7 +125,11 @@ namespace NNMetrics.Controllers
                     Data.SharedData.userName = model.Email;
                     Data.SharedData.adminUserName = model.Email;
 
-                    if(Data.SharedData.userName != "admin@admin.com")
+                    // Down security is crappy. Next implementation would be to create an Admin Table with field SecretWord.
+                    // This SecretWord can be given for every instance of this web app and makes it more secure.
+                    // To enhance security even more, make web app ssl and encrypt the secret word.
+                    // TODO: implement better security. Not it must contain admin as admin user. Very bad.
+                    if(!Data.SharedData.userName.Contains("admin"))
                     {
                         return RedirectToAction("index", "Teams");
                     }
