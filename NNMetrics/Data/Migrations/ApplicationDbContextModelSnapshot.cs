@@ -10,9 +10,23 @@ using System;
 
 namespace NNMetrics.Data.Migrations
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   An application database context model snapshot. </summary>
+    ///
+    /// <remarks>   Administrator, 19/06/2018. </remarks>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Builds a model. </summary>
+        ///
+        /// <remarks>   Administrator, 19/06/2018. </remarks>
+        ///
+        /// <param name="modelBuilder"> The model builder. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

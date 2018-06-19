@@ -21,6 +21,7 @@ namespace NNMetrics.Controllers
 
     public class TeamsController : Controller
     {
+        /// <summary>   The context. </summary>
         private readonly ApplicationDbContext _context;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,6 +281,16 @@ namespace NNMetrics.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   Queries if a given teams exists. </summary>
+        ///
+        /// <remarks>   Administrator, 19/06/2018. </remarks>
+        ///
+        /// <param name="id">   The identifier. </param>
+        ///
+        /// <returns>   True if it succeeds, false if it fails. </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private bool TeamsExists(int id)
         {

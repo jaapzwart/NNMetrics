@@ -29,9 +29,7 @@ namespace NNMetrics.Models.ManageViewModels
         public string Username { get; set; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        /// Gets or sets a value indicating whether this object is email confirmed.
-        /// </summary>
+        /// <summary>   Gets or sets a value indicating whether this object is email confirmed. </summary>
         ///
         /// <value> True if this object is email confirmed, false if not. </value>
         ////////////////////////////////////////////////////////////////////////////////////////////////////

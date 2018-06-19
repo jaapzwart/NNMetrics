@@ -163,6 +163,8 @@ namespace NNMetrics.Controllers
         ///
         /// <remarks>   Administrator, 16/06/2018. </remarks>
         ///
+        /// <param name="userName"> Name of the user. </param>
+        ///
         /// <returns>   An IActionResult. </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
