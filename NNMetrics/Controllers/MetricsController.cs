@@ -506,8 +506,8 @@ namespace NNMetrics.Controllers
             ViewBag.Error = "";
             try
             {
-                // delete Metrics for given user.
-                _context.RemoveRange(_context.Metrics.Where(x => x.userName.Contains(SharedData.userName)));
+                // delete Metrics for given user with given team.
+                _context.RemoveRange(_context.Metrics.Where(x => x.userName.Contains(SharedData.userName) && x.TeamName.Equals(SharedData.teamName)));
                 _context.SaveChanges();
                 ViewBag.error = "Records succesful deleted.";
                 
