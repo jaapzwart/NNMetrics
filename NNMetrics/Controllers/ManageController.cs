@@ -4,25 +4,24 @@
 // summary:	Implements the manage controller class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NNMetrics.Data;
 using NNMetrics.Models;
 using NNMetrics.Models.ManageViewModels;
 using NNMetrics.Services;
-using NNMetrics.Data;
-
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // namespace: NNMetrics.Controllers
-// 
+//
 // summary:	Controller for handling the management of accounts.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,12 +39,16 @@ namespace NNMetrics.Controllers
     {
         /// <summary>   Manager for user. </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
         /// <summary>   Manager for sign in. </summary>
         private readonly SignInManager<ApplicationUser> _signInManager;
+
         /// <summary>   The email sender. </summary>
         private readonly IEmailSender _emailSender;
+
         /// <summary>   The logger. </summary>
         private readonly ILogger _logger;
+
         /// <summary>   The URL encoder. </summary>
         private readonly UrlEncoder _urlEncoder;
 
@@ -130,10 +133,9 @@ namespace NNMetrics.Controllers
         public IActionResult ListUsers()
         {
             var listusers = from b in _userManager.Users
-                             select b;
-            
-            return View(listusers.ToList());
+                            select b;
 
+            return View(listusers.ToList());
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -743,7 +745,7 @@ namespace NNMetrics.Controllers
             ViewBag.error = "";
             try
             {
-                if(SharedData.MetricsRecordCount > 0)
+                if (SharedData.MetricsRecordCount > 0)
                 {
                     ViewBag.error = "Still records available for this user. Delete them first.";
                     return View();
@@ -766,16 +768,14 @@ namespace NNMetrics.Controllers
                     ViewBag.error = e.Message;
                 }
                 return View();
-                
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ViewBag.error = "Delete unsuccessful:" + e.Message;
                 return View(); ;
             }
-            
         }
-        
+
         #region Helpers
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -841,6 +841,6 @@ namespace NNMetrics.Controllers
                 unformattedKey);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

@@ -26,7 +26,6 @@ namespace NNMetrics.Data.Migrations
 
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +38,6 @@ namespace NNMetrics.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
     }
 }

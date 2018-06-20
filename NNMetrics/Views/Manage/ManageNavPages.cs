@@ -4,12 +4,9 @@
 // summary:	Implements the manage navigation pages class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
 
 namespace NNMetrics.Views.Manage
 {

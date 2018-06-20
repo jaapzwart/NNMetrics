@@ -4,12 +4,8 @@
 // summary:	Implements the email sender extensions class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using NNMetrics.Services;
 
 namespace NNMetrics.Services
 {

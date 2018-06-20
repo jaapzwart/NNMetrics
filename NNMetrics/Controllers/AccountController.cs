@@ -4,9 +4,6 @@
 // summary:	Implements the account controller class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +12,9 @@ using Microsoft.Extensions.Logging;
 using NNMetrics.Models;
 using NNMetrics.Models.AccountViewModels;
 using NNMetrics.Services;
-
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // namespace: NNMetrics.Controllers
@@ -37,10 +36,13 @@ namespace NNMetrics.Controllers
     {
         /// <summary>   Manager for user. </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
         /// <summary>   Manager for sign in. </summary>
         private readonly SignInManager<ApplicationUser> _signInManager;
+
         /// <summary>   The email sender. </summary>
         private readonly IEmailSender _emailSender;
+
         /// <summary>   The logger. </summary>
         private readonly ILogger _logger;
 
@@ -129,7 +131,7 @@ namespace NNMetrics.Controllers
                     // This SecretWord can be given for every instance of this web app and makes it more secure.
                     // To enhance security even more, make web app ssl and encrypt the secret word.
                     // TODO: implement better security. Now it must contain admin as admin user. Very bad.
-                    if(!Data.SharedData.userName.Contains("admin"))
+                    if (!Data.SharedData.userName.Contains("admin"))
                     {
                         return RedirectToAction("index", "Teams");
                     }
@@ -761,6 +763,6 @@ namespace NNMetrics.Controllers
             }
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

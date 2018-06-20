@@ -6,7 +6,7 @@
 
 <h2>Index for user - @ViewBag.userName with team @ViewBag.teamName</h2>
 <link rel="stylesheet" href="~/css/ProjectPredictionBasic.css" />
-<p>   
+<p>
     <button class="button28 button28" style="float: left;width:180px;" onclick="location.href='@Url.Action("Create", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">Create new</font></button>
 </p><br /><br />
 <button class="button25 button25" style="float: left;width:180px;" onclick="location.href='@Url.Action("UseDataFromServerMTTR", "Metrics")';return false;"><font style="font-weight:bold;font-size:12px;">MTTR</font></button>
@@ -66,14 +66,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfDeployments)
             </td>
-            <td>                
+            <td>
                 <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Edit", "Metrics", new { id = item.ID })';return false;">Edit</button>
                 <button class="button28 button28" style="width:60px;" onclick="location.href='@Url.Action("Details", "Metrics", new { id = item.ID })';return false;">Details</button>
-                <button class="button31 button31" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Metrics", new { id = item.ID })';return false;">Delete</button>                
+                <button class="button31 button31" style="width:60px;" onclick="location.href='@Url.Action("Delete", "Metrics", new { id = item.ID })';return false;">Delete</button>
             </td>
         </tr>
 }
     </tbody>
-
-    
 </table>

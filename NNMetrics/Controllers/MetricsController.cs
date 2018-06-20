@@ -4,14 +4,13 @@
 // summary:	Implements the metrics controller class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NNMetrics.Data;
 using NNMetrics.Models;
 using System;
-
+using System.Linq;
+using System.Threading.Tasks;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // namespace: NNMetrics.Controllers
@@ -29,7 +28,6 @@ namespace NNMetrics.Controllers
 
     public class MetricsController : Controller
     {
-        
         /// <summary>   The context. </summary>
         private readonly ApplicationDbContext _context;
 
@@ -205,10 +203,10 @@ namespace NNMetrics.Controllers
             if (SharedData.userName.Equals(""))
                 return RedirectToAction("Login", "Account");
             SharedData._contextGlobal = _context;
-            if(SharedData.userName.Equals(""))
+            if (SharedData.userName.Equals(""))
                 SharedData.userName = User.Identity.Name;
 
-            var signatures = from b in _context.Metrics                                      
+            var signatures = from b in _context.Metrics
                              where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                              orderby b.ID descending
                              select b;
@@ -217,7 +215,7 @@ namespace NNMetrics.Controllers
 
             //-------------------------------------------------------------------------------------------
             // Down iterations are needed to get the data used for the json charts data.
-            // Dynamic getting data in the model and view built up every call puts some difficulties 
+            // Dynamic getting data in the model and view built up every call puts some difficulties
             // in the freedom of getting data in the view where if statements will fail.
             // Although probably better solution are possible than the one down here, it is effective
             // and only makes the different built up of data in the model helper still a bit clumsy.
@@ -234,9 +232,9 @@ namespace NNMetrics.Controllers
                        orderby b.ID descending
                        select b.MTTR;
             int i = 0;
-            foreach(var item in mttr)
+            foreach (var item in mttr)
             {
-                if(i < 9)
+                if (i < 9)
                     SharedData.db_mttr.Add(item);
                 i++;
             }
@@ -250,7 +248,7 @@ namespace NNMetrics.Controllers
                      select b.POSatisfaction;
             foreach (var item in po)
             {
-                if(i < 9)
+                if (i < 9)
                     SharedData.db_PO.Add(item);
                 i++;
             }
@@ -264,7 +262,7 @@ namespace NNMetrics.Controllers
                             select b.CompletedForecast;
             foreach (var item in completed)
             {
-                if(i < 9)
+                if (i < 9)
                     SharedData.db_Completed.Add(item);
                 i++;
             }
@@ -278,7 +276,7 @@ namespace NNMetrics.Controllers
                               select b.NumberOfDeployments;
             foreach (var item in deployments)
             {
-                if(i < 9)
+                if (i < 9)
                     SharedData.db_dp.Add(item);
                 i++;
             }
@@ -290,9 +288,9 @@ namespace NNMetrics.Controllers
                         where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                         orderby b.ID descending
                         select b.Title;
-            foreach(var item in title)
+            foreach (var item in title)
             {
-                if(i < 9)
+                if (i < 9)
                     SharedData.db_title.Add(item);
                 i++;
             }
@@ -325,7 +323,7 @@ namespace NNMetrics.Controllers
             {
                 return NotFound();
             }
-            
+
             return View(metrics);
         }
 
@@ -369,7 +367,7 @@ namespace NNMetrics.Controllers
                 SharedData.teamName = metrics.TeamName;
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(model: metrics);
         }
 
@@ -512,7 +510,6 @@ namespace NNMetrics.Controllers
                 _context.RemoveRange(_context.Metrics.Where(x => x.userName.Contains(SharedData.userName) && x.TeamName.Equals(SharedData.teamName)));
                 _context.SaveChanges();
                 ViewBag.error = "Records succesful deleted.";
-                
             }
             catch (Exception e)
             {

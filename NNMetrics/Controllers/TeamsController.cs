@@ -4,12 +4,12 @@
 // summary:	Implements the teams controller class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NNMetrics.Data;
 using NNMetrics.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NNMetrics.Controllers
 {
@@ -120,8 +120,7 @@ namespace NNMetrics.Controllers
             return View();
         }
 
-        
-        // To protect from over posting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from over posting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -173,8 +172,7 @@ namespace NNMetrics.Controllers
             return View(teams);
         }
 
-        
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -270,7 +268,7 @@ namespace NNMetrics.Controllers
                              where b.userName == SharedData.userName && b.TeamName == SharedData.teamName
                              orderby b.ID descending
                              select b;
-            if(signatures.Count() > 0)
+            if (signatures.Count() > 0)
             {
                 SharedData.ErrorDeleteTeams = "Still metric records available. Delete them first.";
                 return RedirectToAction("Index", "Teams");

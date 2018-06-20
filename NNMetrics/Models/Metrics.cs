@@ -4,10 +4,10 @@
 // summary:	Implements the metrics class
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using NNMetrics.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NNMetrics.Data;
 
 namespace NNMetrics.Models
 {
@@ -160,7 +160,7 @@ namespace NNMetrics.Models
         public static List<object> MultiLineDataMTTR()
         {
             List<object> objs = new List<object>();
-           
+
             if (SharedData.db_mttr.Count().Equals(1))
             {
                 objs.Add(new[] { "", SharedData.db_title[0] });

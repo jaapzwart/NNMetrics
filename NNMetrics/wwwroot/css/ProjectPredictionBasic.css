@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
     ------------------------------------------------------------------------
     Text boxes
     ------------------------------------------------------------------------
@@ -505,7 +505,6 @@ h1 {
     background-size: 100%;
 }
 
-  
 .button:hover {
   background: orange;
 }
@@ -600,7 +599,6 @@ h1 {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
 
  .buttonRed {
     border-radius: 25px;
@@ -749,7 +747,7 @@ h1 {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-  
+
 .button20:hover {
   background: orange;
 }
@@ -905,7 +903,6 @@ hr {
         cursor: pointer;
     }
 
-
 /*
     Other button CSS
 */
@@ -918,7 +915,7 @@ hr {
     display: inline-block;
     font-size: 12px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; 
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
 }

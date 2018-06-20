@@ -7,7 +7,7 @@
     <script>
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
-        
+
         function drawChart() {
             $.get('JsonDataPO', function (jsonData) {
                 data = google.visualization.arrayToDataTable(jsonData, false);
@@ -15,7 +15,7 @@
                     title: "Bar Chart PO Satisfaction - Only last 9 Sprints are visible",
                     width: 800,
                     height: 600,
-                    vAxis: { textPosition: 'none' },                    
+                    vAxis: { textPosition: 'none' },
                 };
                 option.is3D = true;
                 chart = new google.visualization.BarChart(document.getElementById('chart1'));
@@ -24,5 +24,3 @@
         }
     </script>
 }
-
-
